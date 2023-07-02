@@ -17,18 +17,19 @@ const onRequest = (config: any) => {
   if (token && config.headers) {
     config.headers.Authorization = `Bearer ${token}`;
   }
-
+  console.log("onreq", "done");
   return config;
 };
 
 // network error
 // خطایی در ارسال ریکوست
 const onRequestError = (error: AxiosError) => {
+  console.log("onreqError", error);
   return Promise.reject(error);
 };
 
 export const onResponse = (config: any) => {
-  console.log("fig", config);
+  console.log("onRes", config);
   return config;
 };
 
@@ -39,8 +40,8 @@ const onResponseError = (error: AxiosError) => {
 };
 
 const setupInterceptor = (axiosInstance: AxiosInstance) => {
-  axiosInstance.interceptors.request.use();
-  axiosInstance.interceptors.response.use();
+  axiosInstance.interceptors.request.use(onRequest, onRequestError);
+  axiosInstance.interceptors.response.use(onResponse, onResponseError);
 
   return axiosInstance;
 };
