@@ -52,7 +52,6 @@ export const LoginByPhoneNumber = (): React.JSX.Element => {
         console.log(res);
 
         //if response is true then redirect to dashboard else show error message
-        alert("OTP verified successfully");
 
         if ((res?.status as number) == 200) {
           setLogin(true);
@@ -192,7 +191,9 @@ export const LoginByPhoneNumber = (): React.JSX.Element => {
           </form>
         </div>
       ) : (
-        <p className="text-lg text-green-700">You successfully Login... 🎉</p>
+        <div className="">
+          <p className="text-lg text-green-700">You successfully Login... 🎉</p>
+        </div>
       )}
     </Layout>
   );
